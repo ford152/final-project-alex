@@ -91,6 +91,18 @@ describe("Player Accounting", function () {
 
       expect(await deployedPA.connect(ownerAccount).getPlayerBalance(playerAccount.address)).to.equal(amount);
     });
+
+    it("Player account call to deposit USDC should fail because player doesn't have enough funds", async function () {
+      const { deployedUSDC, deployedPA, playerAccount, ownerAccount } = await loadFixture(deployContractsFixture);
+      const deployedPlayerAccountAddr = await deployedPA.getAddress();
+
+      // Player approves the Player Accounting contract to take up to 3 USDC tokens from player's wallet
+      await deployedUSDC.connect(playerAccount).approve(deployedPlayerAccountAddr, ethers.parseUnits("1.0", 18));
+
+      // Player tries to deposit 25 USDC
+      await expect(deployedPA.connect(playerAccount).deposit(ethers.parseUnits("25.0", 18)))
+        .to.be.revertedWith('The calling account does not have enough ERC20 funds for the deposit');
+    });
   });
 
   describe("Owner sets the player's account set to active", function () {

@@ -22,6 +22,13 @@ contract PlayerAccounting {
      * Used by player's wallet to deposit ERC20 stablecoins
      */
     function deposit(uint256 amount) public {
+        // Verify that player has enough balance to perform the deposit
+        uint balance = ERC20(usdcContractAddress).balanceOf(msg.sender);
+        require(
+            balance >= amount,
+            "The calling account does not have enough ERC20 funds for the deposit"
+        );
+
         // Pull the ERC20 tokens using transferFrom
         bool success = ERC20(usdcContractAddress).transferFrom(
             msg.sender,
