@@ -1,7 +1,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [create-web3-dapp](https://www.alchemy.com/create-web3-dapp).  These instructions are for use with the Polygon Mumbai testnet.
 
 ## Getting Started
-Ensure you are running node v18.17 or later
+Ensure you are running node v18.17 or later  
+Setup the environment variables:
+1) Rename sample.env to .env.local file
+2) Set ALCHEMY_API_KEY to your Alchemy api key
+3) Set WALLETCONNECT_PROJ_ID to your wallet connect project id.  You can create a free account [here](https://cloud.walletconnect.com/).
+4) If you deploy a  new PlayerAccounting contract (see the contract  folder readme), update the NEXT_PUBLIC_PLAYER_ACCOUNTING_CONTRACT_ADDRESS setting to the newly deployed contract address.  Note that the existing sample.env file is pointing to a contract instance already deployed on mumbai that you can use.
 
 Start the development server:
 
