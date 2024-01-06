@@ -20,4 +20,15 @@ To deploy the contract to the mumbai network:
 ```
 npm run deploy-mumbai
 ```
+5) Make note of the deployed contract's address
 
+## Retrieving the amount of USDC that a Player has deposited to the smart contract
+Note: this step requires running client-dapp and depositing funds from a player wallet
+1) Set PLAYER_ACCOUNT_MUMBAI to the wallet address of the player account (to retrieve the balance of USDC deposited for that player)
+2) Set PLAYER_ACCOUNTING_DEPLOYED_ADDRESS_MUMBAI to the Player Accouting smart contract address that was deployed in the prior step
+
+3) Run:
+```
+npm run player-balance-mumbai
+```
+This will retrieve the amount of USDC that the player deposited from the dApp
