@@ -22,6 +22,7 @@ describe("Player Accounting", function () {
 
     // Send the player wallet some fake USDC
     const amount = ethers.parseUnits("7.0", 18);
+
     //Define the data parameter
     const data = deployedUSDC.interface.encodeFunctionData("transfer", [playerAccount.address, amount])
 
@@ -39,7 +40,6 @@ describe("Player Accounting", function () {
     // Get the player's USDC balance
     const balance = await deployedUSDC.balanceOf(playerAccount.address);
     console.log(`Player now has ${ethers.formatEther(balance)} USDC tokens`);
-
 
     // Deploy the PlayerAccounting contract
     const PlayerAccountingInstance = await ethers.getContractFactory('PlayerAccounting');
@@ -70,7 +70,7 @@ describe("Player Accounting", function () {
         expect(await deployedPA.connect(ownerAccount).getPlayerActiveStatus(playerAccount.address)).to.be.false;
       });
 
-      it("Player's USDC balance seshould be zero", async function () {
+      it("Player's USDC balance should be zero", async function () {
         const { deployedPA, ownerAccount, playerAccount } = await loadFixture(deployContractsFixture);
         expect(await deployedPA.connect(ownerAccount).getPlayerBalance(playerAccount.address)).to.equal(0);
       });
@@ -90,6 +90,7 @@ describe("Player Accounting", function () {
       await deployedPA.connect(playerAccount).deposit(amount);
 
       expect(await deployedPA.connect(ownerAccount).getPlayerBalance(playerAccount.address)).to.equal(amount);
+      expect(await deployedPA.connect(playerAccount).getBalance()).to.equal(amount);
     });
 
     it("Player account call to deposit USDC should fail because player doesn't have enough funds", async function () {

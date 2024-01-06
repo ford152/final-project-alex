@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "deploy-local": "npx hardhat run scripts/deploy.ts",
-    "deploy-mumbai": "npx hardhat run scripts/deploy.ts --network mumbai"
+    "deploy-mumbai": "npx hardhat run scripts/deploy.ts --network mumbai",
+    "player-balance-mumbai": "npx hardhat run scripts/getPlayerBalance.ts --network mumbai"
   },
   "keywords": [],
   "author": "",
